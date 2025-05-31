@@ -21,9 +21,10 @@ export default function Home() {
           height={150}
           className="rounded-full mb-6"
         />
-        <h1 className="text-4xl font-bold mb-4">Hi, I'm Sooham Bhattacharyya</h1>
+        
+      <h1 className="text-4xl font-bold mb-4">Hi, I&rsquo;m Sooham Bhattacharyya</h1>
         <p className="text-lg text-center max-w-xl">
-          I'm a passionate teacher and developer. I love to share knowledge, help students grow, and build useful software projects.
+          I&rsquo;m a passionate teacher and developer. I love to share knowledge, help students grow, and build useful software projects.
         </p>
       </div>
     </main>

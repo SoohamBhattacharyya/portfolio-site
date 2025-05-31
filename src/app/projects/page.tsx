@@ -11,8 +11,8 @@ export default function ProjectsPage() {
             A fully responsive personal website built with <strong>Next.js</strong> and <strong>Tailwind CSS</strong>. 
             It showcases my background, teaching, and projects — and helps students and collaborators get in touch with me.
           </p>
-          <p className="mt-2 text-sm text-gray-600"><em>(You're viewing this project now!)</em></p>
-          <a 
+          <p className="mt-2 text-sm text-gray-600"><em>(You are viewing this project now!)</em></p>
+           <a 
             href="https://github.com/yourusername/portfolio-website" 
             target="_blank" 
             className="text-blue-600 underline mt-2 inline-block"

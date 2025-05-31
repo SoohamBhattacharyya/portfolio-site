@@ -6,7 +6,7 @@ export default function TeachingPage() {
       <p className="text-lg max-w-3xl leading-relaxed mb-8">
         As a <strong>Technical Assistant</strong> at <strong>BPIE</strong>, I take pride in delivering both <strong>theory</strong> and <strong>practical</strong> classes for Computer Science and related subjects.
         <br /><br />
-        My teaching focuses on clear explanations, step-by-step problem solving, and real-world application. I ensure students understand the logic behind each concept and feel confident to implement what they’ve learned.
+        My teaching focuses on clear explanations, step-by-step problem solving, and real-world application. I ensure students understand the logic behind each concept and feel confident to implement what they have learned.
         <br /><br />
         I regularly guide students through lab sessions, coding exercises, and project-building activities to strengthen their practical knowledge alongside classroom learning.
       </p>
@@ -25,7 +25,8 @@ export default function TeachingPage() {
         </blockquote>
 
         <blockquote className="p-4 border-l-4 border-purple-600 bg-gray-50 rounded-md shadow">
-          <p className="italic">“One of the most patient and supportive teachers I've had — always ready to help.”</p>
+          
+        <p className="italic">“One of the most patient and supportive teachers I have had — always ready to help.”</p>
           <footer className="mt-2 text-right text-sm text-gray-600">— Feedback from workshop attendee</footer>
         </blockquote>
       </div>
