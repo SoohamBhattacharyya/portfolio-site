@@ -3,55 +3,93 @@
 import { useState } from "react";
 
 export default function ContactPage() {
-  const [status, setStatus] = useState("idle");
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e: any) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setStatus("sending");
+    setLoading(true);
 
-    const form = new FormData(e.target);
     const res = await fetch("https://formspree.io/f/xvgrpnyv", {
       method: "POST",
-      body: form,
-      headers: {
-        Accept: "application/json",
-      },
+      headers: { Accept: "application/json" },
+      body: JSON.stringify(form),
     });
 
+    setLoading(false);
     if (res.ok) {
-      setStatus("sent");
+      setSubmitted(true);
+      setForm({ name: "", email: "", message: "" });
     } else {
-      setStatus("error");
+      alert("Something went wrong. Please try again.");
     }
   };
 
   return (
-    <main className="min-h-screen p-6 bg-white text-gray-800">
-      <h1 className="text-3xl font-bold mb-6">Contact Me</h1>
+    <main className="min-h-screen p-8 bg-white text-gray-800">
+      <h1 className="text-4xl font-bold mb-6">Contact Me</h1>
 
-      <form onSubmit={handleSubmit} className="max-w-xl space-y-4">
-        <div>
-          <label className="block mb-1 font-medium">Name</label>
-          <input type="text" name="name" required className="w-full border border-gray-300 px-4 py-2 rounded" />
-        </div>
+      {/* Personal Info */}
+      <div className="mb-8 space-y-2">
+        <p><strong>Name:</strong> Sooham Bhattacharyya</p>
+        <p><strong>Email:</strong> <a href="mailto:sunnysooham05@gmail.com" className="text-blue-600 underline">sunnysooham05@gmail.com</a></p>
+        <p><strong>Phone:</strong> +91-8101417215</p>
+        <p><strong>GitHub:</strong> <a href="https://github.com/SoohamBhattacharyya" target="_blank" className="text-blue-600 underline">https://github.com/SoohamBhattacharyya</a></p>
+        <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/sooham-bhattacharyya-a90424228" target="_blank" className="text-blue-600 underline">https://www.linkedin.com/in/sooham-bhattacharyya-a90424228</a></p>
+      </div>
 
-        <div>
-          <label className="block mb-1 font-medium">Email</label>
-          <input type="email" name="email" required className="w-full border border-gray-300 px-4 py-2 rounded" />
-        </div>
-
-        <div>
-          <label className="block mb-1 font-medium">Message</label>
-          <textarea name="message" rows={5} required className="w-full border border-gray-300 px-4 py-2 rounded" />
-        </div>
-
-        <button type="submit" className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">
-          {status === "sending" ? "Sending..." : "Send Message"}
-        </button>
-
-        {status === "sent" && <p className="text-green-600">Thanks! Your message was sent.</p>}
-        {status === "error" && <p className="text-red-600">Oops! Something went wrong.</p>}
-      </form>
+      {/* Contact Form */}
+      {!submitted ? (
+        <form onSubmit={handleSubmit} className="space-y-4 max-w-xl">
+          <div>
+            <label className="block mb-1 font-medium">Name</label>
+            <input
+              type="text"
+              name="name"
+              required
+              value={form.name}
+              onChange={handleChange}
+              className="w-full border border-gray-300 rounded-md px-4 py-2"
+            />
+          </div>
+          <div>
+            <label className="block mb-1 font-medium">Email</label>
+            <input
+              type="email"
+              name="email"
+              required
+              value={form.email}
+              onChange={handleChange}
+              className="w-full border border-gray-300 rounded-md px-4 py-2"
+            />
+          </div>
+          <div>
+            <label className="block mb-1 font-medium">Message</label>
+            <textarea
+              name="message"
+              required
+              rows={4}
+              value={form.message}
+              onChange={handleChange}
+              className="w-full border border-gray-300 rounded-md px-4 py-2"
+            />
+          </div>
+          <button
+            type="submit"
+            disabled={loading}
+            className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700"
+          >
+            {loading ? "Sending..." : "Send Message"}
+          </button>
+        </form>
+      ) : (
+        <p className="text-green-600 font-semibold">Thank you! Your message has been sent.</p>
+      )}
     </main>
   );
 }
